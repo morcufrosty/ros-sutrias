@@ -147,7 +147,6 @@ def render_layout(title, lang, body, depth=1, active=None, filename="index.html"
             <a href="{base}projectes.html"{' class="active"' if active=='projectes' else ''}>{u['projectes']}</a>
             <a href="{base}equip.html"{' class="active"' if active=='equip' else ''}>{u['equip']}</a>
             <a href="{base}docencia.html"{' class="active"' if active=='docencia' else ''}>{u['docencia']}</a>
-            <a href="{base}contacte.html"{' class="active"' if active=='contacte' else ''}>{u['contacte']}</a>
             <span class="lang-switch">
                 <a href="{prefix}../ca/{filename}" class="{'active' if lang=='ca' else ''}">CAT</a>
                 <a href="{prefix}../es/{filename}" class="{'active' if lang=='es' else ''}">ESP</a>
@@ -172,7 +171,7 @@ def render_layout(title, lang, body, depth=1, active=None, filename="index.html"
 {body}
 </main>
 <footer class="site-footer">
-    <p>&copy; ROS &amp; SUTRIAS — Estudi d'arquitectura, Barcelona — <a href="mailto:ros-sutrias@coac.net">ros-sutrias@coac.net</a></p>
+    <p>&copy; ROS &amp; SUTRIAS — Estudi d'arquitectura, Barcelona — <a href="tel:+34670297979">670 297 979</a> · <a href="tel:+34655696777">655 696 777</a></p>
 </footer>
 </body>
 </html>
@@ -194,41 +193,18 @@ def main():
     for sub in ["assets/fotos/proyectos", "assets/fotos/cuadros", "assets/fotos/premios", "assets/fotos/interfaz", "novaWeb"]:
         (site_dir / sub).mkdir(parents=True, exist_ok=True)
 
-    print("=== Building root landing (faithful to original 2010 design) ===")
+    print("=== Building root redirect → /ca/ ===")
     landing = """<!doctype html>
 <html lang="ca">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ROS &amp; SUTRIAS</title>
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="canonical" href="https://ros-sutrias.com/ca/">
+<meta http-equiv="refresh" content="0; url=ca/index.html">
+<script>window.location.replace("ca/index.html");</script>
 </head>
-<body class="landing-body">
-    <div class="landing-frame">
-        <div class="landing-langs-row">
-            <a class="lang-btn" href="ca/index.html"
-               onmouseover="this.firstElementChild.src='assets/fotos/interfaz/BE.CAT.jpg'"
-               onmouseout="this.firstElementChild.src='assets/fotos/interfaz/BA.CAT.jpg'">
-                <img src="assets/fotos/interfaz/BA.CAT.jpg" alt="Català">
-            </a>
-            <a class="lang-btn" href="es/index.html"
-               onmouseover="this.firstElementChild.src='assets/fotos/interfaz/BE.CAS.jpg'"
-               onmouseout="this.firstElementChild.src='assets/fotos/interfaz/BA.CAS.jpg'">
-                <img src="assets/fotos/interfaz/BA.CAS.jpg" alt="Español">
-            </a>
-            <a class="lang-btn" href="en/index.html"
-               onmouseover="this.firstElementChild.src='assets/fotos/interfaz/BE.ENG.jpg'"
-               onmouseout="this.firstElementChild.src='assets/fotos/interfaz/BA.ENG.jpg'">
-                <img src="assets/fotos/interfaz/BA.ENG.jpg" alt="English">
-            </a>
-        </div>
-        <div class="landing-letra">
-            <img src="assets/fotos/index_letra.jpg" alt="ROS & SUTRIAS">
-        </div>
-        <a class="landing-credits" href="mailto:ros-sutrias@coac.net">
-            <img src="assets/fotos/index_credits.jpg" alt="ros-sutrias@coac.net">
-        </a>
-    </div>
+<body>
+<p>Redirecting to <a href="ca/index.html">ros-sutrias.com</a>…</p>
 </body>
 </html>
 """
@@ -250,7 +226,6 @@ def main():
             ("projectes.html", u["projectes"]),
             ("equip.html", u["equip"]),
             ("docencia.html", u["docencia"]),
-            ("contacte.html", u["contacte"]),
         ]
         nav_html = "".join(
             f'<a class="home-link" href="{h}">{escape(t)}</a>'
@@ -415,15 +390,9 @@ def main():
         """
         (ldir / "docencia.html").write_text(render_layout(u["docencia"], lang, body, depth=1, active="docencia", filename="docencia.html"), encoding="utf-8")
 
-        print(f"  /{lang}/contacte.html")
-        body = f"""
-        <section class="page-head"><h1>{escape(u['contacte'])}</h1></section>
-        <section class="contact">
-            <p><a href="mailto:ros-sutrias@coac.net">ros-sutrias@coac.net</a></p>
-            <p class="muted">Barcelona</p>
-        </section>
-        """
-        (ldir / "contacte.html").write_text(render_layout(u["contacte"], lang, body, depth=1, active="contacte", filename="contacte.html"), encoding="utf-8")
+        old_contact = ldir / "contacte.html"
+        if old_contact.exists():
+            old_contact.unlink()
 
     print("Done.")
 
