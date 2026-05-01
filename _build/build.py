@@ -159,19 +159,19 @@ def render_layout(title, lang, body, depth=1, active=None, filename="index.html"
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{escape(title)} — ROS & SUTRIAS</title>
+<title>{escape(title)} — ROS - SUTRIAS i ASSOCIATS</title>
 <link rel="stylesheet" href="{css}">
 </head>
 <body>
 <header class="site-header">
-    <a class="brand" href="{home_link}">ROS &amp; SUTRIAS</a>
+    <a class="brand" href="{home_link}">ROS - SUTRIAS i ASSOCIATS</a>
     {nav}
 </header>
 <main>
 {body}
 </main>
 <footer class="site-footer">
-    <p>&copy; ROS &amp; SUTRIAS — Estudi d'arquitectura, Barcelona — <a href="tel:+34670297979">670 297 979</a> · <a href="tel:+34655696777">655 696 777</a></p>
+    <p>&copy; ROS - SUTRIAS i ASSOCIATS — Estudi d'arquitectura, Barcelona — <a href="tel:+34670297979">670 297 979</a> · <a href="tel:+34655696777">655 696 777</a></p>
 </footer>
 </body>
 </html>
@@ -198,7 +198,7 @@ def main():
 <html lang="ca">
 <head>
 <meta charset="utf-8">
-<title>ROS &amp; SUTRIAS</title>
+<title>ROS - SUTRIAS i ASSOCIATS</title>
 <link rel="canonical" href="https://ros-sutrias.com/ca/">
 <meta http-equiv="refresh" content="0; url=ca/index.html">
 <script>window.location.replace("ca/index.html");</script>
@@ -233,7 +233,7 @@ def main():
         )
         body = f"""
         <section class="home-hero-plain">
-            <h1 class="home-title">ROS &amp; SUTRIAS</h1>
+            <h1 class="home-title">ROS - SUTRIAS i ASSOCIATS</h1>
             <p class="home-tagline">{escape(u['site_intro'])}</p>
             <nav class="home-nav-min">{nav_html}</nav>
         </section>
